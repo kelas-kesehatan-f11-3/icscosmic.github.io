@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ɪᴄs | SUPREME MODE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{background:black;color:#00ffff;overflow:hidden;text-align:center;}
+
+canvas{position:fixed;top:0;left:0;z-index:-1;}
+
+.logo{font-size:36px;margin-top:40px;text-shadow:0 0 20px #00ffff;}
+.subtitle{color:#ff00ff;margin-bottom:10px;}
+
+.clock{margin:10px;color:#00ff00;}
+
+.card{
+background:#000000cc;
+border:1px solid #00ffff;
+padding:20px;
+margin:20px auto;
+max-width:350px;
+border-radius:15px;
+box-shadow:0 0 20px #00ffff55;
+}
+
+button{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+border-radius:10px;
+background:#00ffff;
+color:black;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#ff00ff;
+color:white;
+}
+
+#welcomeScreen{
+position:fixed;
+width:100%;
+height:100vh;
+background:black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+#welcomeText{
+font-size:24px;
+color:#00ffff;
+text-shadow:0 0 20px #00ffff;
+animation:fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn{
+0%{opacity:0;}
+100%{opacity:1;}
+}
+
+.footer{
+position:fixed;
+bottom:10px;
+width:100%;
+font-size:12px;
+color:#00ffff88;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- WELCOME SCREEN -->
+<div id="welcomeScreen">
+<div id="welcomeText">Halo, Selamat Datang di ɪᴄs</div>
+<p style="margin-top:15px;color:#ff00ff;">𝐈𝐧𝐬𝐭𝐢𝐭𝐮𝐭𝐞 𝐨𝐟 𝐂𝐨𝐬𝐦𝐢𝐜 𝐒𝐭𝐮𝐝𝐢𝐞𝐬</p>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6e8e5a6b6a.mp3?filename=cyberpunk-music-110997.mp3" type="audio/mpeg">
+</audio>
+
+<div class="logo">ɪᴄs</div>
+<div class="subtitle">SUPREME COSMIC DIVISION</div>
+<div class="clock" id="clock"></div>
+
+<div class="card">
+<h3>Portal Utama</h3>
+<button onclick="openLink()">ENTER</button>
+</div>
+
+<button onclick="toggleMusic()">🔊 Music On/Off</button>
+
+<div class="footer">
+Terima kasih telah mengunjungi ɪᴄs • Sampai jumpa di dimensi berikutnya ⚡
+</div>
+
+<script>
+
+/* =======================
+   ADMIN LINK PROTECTION
+======================= */
+
+const ADMIN_KEY = "ICS_SUPREME_2026"; 
+let SECRET_LINK = "https://example.com"; 
+
+function openLink(){
+window.open(SECRET_LINK,"_blank");
+}
+
+/* =======================
+   MUSIC CONTROL
+======================= */
+
+const music=document.getElementById("bgMusic");
+
+setTimeout(()=>{
+music.play().catch(()=>{});
+},3000);
+
+function toggleMusic(){
+if(music.paused){music.play();}
+else{music.pause();}
+}
+
+/* =======================
+   WELCOME SCREEN
+======================= */
+
+setTimeout(()=>{
+document.getElementById("welcomeScreen").style.display="none";
+},3000);
+
+/* =======================
+   STARFIELD
+======================= */
+
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<200;i++){
+stars.push({x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*1.5});
+}
+
+function drawStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#00ffff";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+s.y+=0.5;
+if(s.y>canvas.height)s.y=0;
+});
+requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* =======================
+   CLOCK
+======================= */
+
+function updateClock(){
+let now=new Date();
+document.getElementById("clock").innerText=now.toLocaleTimeString();
+}
+setInterval(updateClock,1000);
+updateClock();
+
+</script>
+
+</body>
+  </html>
+  
